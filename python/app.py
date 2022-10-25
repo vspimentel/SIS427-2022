@@ -23,10 +23,10 @@ connection.autocommit = True
 cursor = connection.cursor()
 
 #Crear base de datos
-# sql_drop = "DROP DATABASE IF EXISTS \"SIS427VSPV\""
-# cursor.execute(sql_drop)
-# sql_db = "CREATE DATABASE \"SIS427VSPV\" WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'Spanish_Mexico.1252' LC_CTYPE = 'Spanish_Mexico.1252' TABLESPACE = pg_default CONNECTION LIMIT = -1 IS_TEMPLATE = False;"
-# cursor.execute(sql_db)
+sql_drop = "DROP DATABASE IF EXISTS \"SIS427VSPV\""
+cursor.execute(sql_drop)
+sql_db = "CREATE DATABASE \"SIS427VSPV\" WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'Spanish_Mexico.1252' LC_CTYPE = 'Spanish_Mexico.1252' TABLESPACE = pg_default CONNECTION LIMIT = -1 IS_TEMPLATE = False;"
+cursor.execute(sql_db)
 connection.close()
 
 #Conectar a la base de datos creada
