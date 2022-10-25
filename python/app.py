@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect
 import psycopg2.extras
 
 app = Flask(__name__)
+#Datos para ingresar
+#Correo: vito.pimentel@gmail.com
+#Contraseña: 1234
 
 #Conectar a la base de datos princial
 try:
@@ -20,10 +23,10 @@ connection.autocommit = True
 cursor = connection.cursor()
 
 #Crear base de datos
-sql_drop = "DROP DATABASE IF EXISTS \"SIS427VSPV\""
-cursor.execute(sql_drop)
-sql_db = "CREATE DATABASE \"SIS427VSPV\" WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'Spanish_Mexico.1252' LC_CTYPE = 'Spanish_Mexico.1252' TABLESPACE = pg_default CONNECTION LIMIT = -1 IS_TEMPLATE = False;"
-cursor.execute(sql_db)
+# sql_drop = "DROP DATABASE IF EXISTS \"SIS427VSPV\""
+# cursor.execute(sql_drop)
+# sql_db = "CREATE DATABASE \"SIS427VSPV\" WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'Spanish_Mexico.1252' LC_CTYPE = 'Spanish_Mexico.1252' TABLESPACE = pg_default CONNECTION LIMIT = -1 IS_TEMPLATE = False;"
+# cursor.execute(sql_db)
 connection.close()
 
 #Conectar a la base de datos creada
@@ -54,7 +57,7 @@ cursor.execute(sql_user)
 @app.route('/')
 def index():
     titulo = "Log in"
-    return render_template('index.html', title = titulo)
+    return render_template('index.html', title = titulo, wrong_data = False)
 
 #Validacion del log in
 @app.route('/login', methods = ['POST'])
@@ -67,7 +70,8 @@ def login():
         validacion = cursor.fetchall()
     if bool(validacion):
         return redirect('/principal')
-    return redirect('/')
+    titulo = "Log in"
+    return render_template('index.html', title = titulo, wrong_data = True)
 
 #Pagina de inicio
 @app.route('/principal')

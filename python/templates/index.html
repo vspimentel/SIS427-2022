@@ -30,6 +30,11 @@
                     <input type="password" name="password" class="form-control"/>
                 </div>
 
+                {% if wrong_data %}
+                    <div style="color:red">Datos incorrectos</div>
+                    <br>
+                {% endif %}
+
                 <!-- Submit button -->
                 <button type="submit" class="btn btn-primary btn-block w-100">Ingresar</button>
             </form>
