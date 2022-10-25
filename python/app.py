@@ -18,11 +18,9 @@ except:
     print("Error de conexión a PostgreSQL")
 
 connection.autocommit = True
-cursor = connection.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+cursor = connection.cursor()
 
 #Crear base de datos
-sql_close = "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE datname = 'SIS427VSPV' AND pid <> pg_backend_pid();"
-cursor.execute(sql_close)
 sql_drop = "DROP DATABASE IF EXISTS \"SIS427VSPV\""
 cursor.execute(sql_drop)
 sql_db = "CREATE DATABASE \"SIS427VSPV\" WITH OWNER = postgres ENCODING = 'UTF8' LC_COLLATE = 'Spanish_Mexico.1252' LC_CTYPE = 'Spanish_Mexico.1252' TABLESPACE = pg_default CONNECTION LIMIT = -1 IS_TEMPLATE = False;"
